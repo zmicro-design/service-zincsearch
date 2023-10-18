@@ -1,0 +1,16 @@
+services:
+  zincsearch:
+    restart: always
+    image: whatwewant/zincsearch:${SERVICE_ZINCSEARCH_IMAGE_VERSION}
+    ports:
+      - 0.0.0.0:${SERVICE_ZINCSEARCH_PORT}:4080
+    environment:
+      ZINC_FIRST_ADMIN_USER: ${SERVICE_ZINCSEARCH_ZINC_FIRST_ADMIN_USER}
+      ZINC_FIRST_ADMIN_PASSWORD: ${SERVICE_ZINCSEARCH_ZINC_FIRST_ADMIN_PASSWORD}
+    volumes:
+      - ${SERVICE_DATA}:/data
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress

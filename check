@@ -1,0 +1,19 @@
+#!/bin/bash
+
+service::config_set() {
+  config::check_or_set $1 $2 $SERVICE_CONFIG "${@:3}"
+}
+
+check() {
+  if [ "$DEBUG" = "true" ]; then
+    log::info "[DEBUG][service]: $SERVICE_CONFIG"
+    cat $SERVICE_CONFIG
+  fi
+
+  service::config_set SERVICE_ZINCSEARCH_PORT text "Port" 4080
+
+  service::config_set SERVICE_ZINCSEARCH_ZINC_FIRST_ADMIN_USER text "Zinc Admin Username" "admin"
+  service::config_set SERVICE_ZINCSEARCH_ZINC_FIRST_ADMIN_PASSWORD text "Zinc Admin Password" "$(os::random_string 8)"
+}
+
+check $@

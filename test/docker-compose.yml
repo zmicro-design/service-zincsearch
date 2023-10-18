@@ -1,0 +1,11 @@
+services:
+  zincsearch:
+    restart: always
+    image: whatwewant/zincsearch:${SERVICE_ZINCSEARCH_IMAGE_VERSION}
+    environment:
+      MEILI_MASTER_KEY: ${SERVICE_ZINCSEARCH_MEILI_MASTER_KEY}
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress
